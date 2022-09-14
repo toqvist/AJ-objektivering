@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.json.simple.parser.ParseException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +25,7 @@ import javafx.stage.Stage;
 public class PrimaryController {
 
     @FXML
-    private void readFile(ActionEvent event) throws IOException {
+    private void readFile(ActionEvent event) throws IOException, ParseException {
 
         // Initialize FileChooser, filter by extensions .csv and .json
         FileChooser fileChooser = new FileChooser();
@@ -34,7 +36,7 @@ public class PrimaryController {
                 new FileChooser.ExtensionFilter("XML", "*.xml"));
 
         File file = fileChooser.showOpenDialog(null);
-        LinkedHashMap<String, ArrayList<String>> map = FileReader.read(file);
+        LinkedHashMap<String, ArrayList<String>> map = myFileReader.read(file);
 
         buildTable(map, event);
 
